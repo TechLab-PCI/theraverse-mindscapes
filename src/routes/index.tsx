@@ -1,10 +1,12 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import {
-  Brain, Sparkles, Activity, ShieldCheck, ArrowDown,
+  Sparkles, Brain, Activity, ShieldCheck, ArrowDown,
   HeartPulse, GraduationCap, Cpu, Scale, Building2, Leaf, Handshake,
+  Mail, MapPin, Linkedin,
 } from "lucide-react";
 import heroImg from "@/assets/hero-vr-student.jpg";
+import logoSvg from "@/assets/theraverse-logo.svg";
 import { LanguageProvider, useLang } from "@/lib/language-context";
 import { translations as T, t, type Lang } from "@/lib/i18n";
 
@@ -12,7 +14,7 @@ export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
       { title: "Theraverse — Mundos Imersivos na Saúde" },
-      { name: "description", content: "Clínica imersiva de saúde mental para jovens nativos digitais, com Realidade Virtual, IA generativa e wearables." },
+      { name: "description", content: "Ecossistema imersivo de saúde mental para jovens nativos digitais, com Realidade Virtual, IA generativa e wearables." },
       { property: "og:title", content: "Theraverse — Mundos Imersivos na Saúde" },
       { property: "og:description", content: "Uma nova geração de cuidados de saúde mental, imersivos, personalizados e seguros." },
     ],
@@ -33,7 +35,7 @@ function Page() {
         <Context />
         <Features />
         <Impact />
-        <News />
+        <Activities />
       </main>
       <PartnersFooter />
     </div>
@@ -61,22 +63,11 @@ function Nav() {
   ];
 
   return (
-    <header
-      className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
-        scrolled ? "py-2" : "py-4"
-      }`}
-    >
+    <header className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${scrolled ? "py-2" : "py-4"}`}>
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
-        <div
-          className={`glass flex items-center justify-between gap-4 rounded-2xl px-3 py-2 sm:px-5 sm:py-3 transition-all ${
-            scrolled ? "shadow-[0_10px_40px_-10px_rgba(0,0,0,0.5)]" : ""
-          }`}
-        >
-          <a href="#top" className="flex items-center gap-2 shrink-0">
-            <Logo />
-            <span className="font-display text-base font-semibold tracking-tight sm:text-lg">
-              Theraverse
-            </span>
+        <div className={`glass flex items-center justify-between gap-4 rounded-2xl px-3 py-2 sm:px-5 sm:py-2.5 transition-all`}>
+          <a href="#top" className="flex items-center gap-2 shrink-0" aria-label="Theraverse">
+            <img src={logoSvg} alt="Theraverse" className="h-7 w-auto sm:h-8" style={{ color: "var(--ink)" }} />
           </a>
 
           <nav className="hidden items-center gap-7 md:flex">
@@ -84,7 +75,7 @@ function Nav() {
               <a
                 key={l.href}
                 href={l.href}
-                className="text-sm text-foreground/75 transition-colors hover:text-foreground"
+                className="text-sm text-foreground/70 transition-colors hover:text-foreground"
               >
                 {l.label}
               </a>
@@ -98,22 +89,13 @@ function Nav() {
   );
 }
 
-function Logo() {
-  return (
-    <div className="relative grid h-9 w-9 place-items-center rounded-xl"
-      style={{ background: "var(--gradient-brand)" }}>
-      <Brain className="h-5 w-5 text-[oklch(0.18_0.04_260)]" strokeWidth={2.4} />
-    </div>
-  );
-}
-
 function LanguageToggle() {
   const { lang, setLang } = useLang();
   return (
     <div
       role="group"
       aria-label="Language"
-      className="relative flex shrink-0 items-center rounded-full border border-white/10 bg-white/5 p-0.5 text-xs font-medium"
+      className="relative flex shrink-0 items-center rounded-full border border-black/10 bg-white/60 p-0.5 text-xs font-medium"
     >
       <span
         aria-hidden
@@ -128,7 +110,7 @@ function LanguageToggle() {
           key={l}
           onClick={() => setLang(l)}
           className={`relative z-10 px-3 py-1.5 uppercase tracking-wider transition-colors ${
-            lang === l ? "text-[oklch(0.18_0.04_260)]" : "text-foreground/70"
+            lang === l ? "text-white" : "text-foreground/65"
           }`}
         >
           {l}
@@ -145,25 +127,19 @@ function Hero() {
   return (
     <section id="top" className="relative flex min-h-[100svh] items-center overflow-hidden pt-28 pb-16">
       <div className="absolute inset-0 -z-10">
-        <img
-          src={heroImg}
-          alt=""
-          width={1600}
-          height={1280}
-          className="h-full w-full object-cover opacity-55"
-        />
+        <img src={heroImg} alt="" className="h-full w-full object-cover" />
         <div
           className="absolute inset-0"
           style={{
             background:
-              "linear-gradient(180deg, oklch(0.18 0.04 260 / 0.5) 0%, oklch(0.18 0.04 260 / 0.85) 70%, oklch(0.18 0.04 260) 100%), radial-gradient(ellipse at 70% 30%, oklch(0.65 0.24 295 / 0.25), transparent 60%)",
+              "linear-gradient(100deg, oklch(0.98 0.01 95 / 0.92) 0%, oklch(0.98 0.01 95 / 0.7) 45%, oklch(0.98 0.01 95 / 0.15) 100%), var(--gradient-hero)",
           }}
         />
       </div>
 
       <div className="mx-auto grid w-full max-w-7xl grid-cols-1 items-center gap-12 px-6 lg:grid-cols-12">
         <div className="lg:col-span-7">
-          <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs uppercase tracking-[0.18em] text-foreground/70 backdrop-blur">
+          <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-black/10 bg-white/70 px-3 py-1 text-xs uppercase tracking-[0.18em] text-foreground/70 backdrop-blur">
             <span className="h-1.5 w-1.5 rounded-full animate-pulse-glow" style={{ background: "var(--teal)" }} />
             {t(T.hero.eyebrow, lang)}
           </div>
@@ -189,7 +165,7 @@ function Hero() {
       <a
         href="#about"
         aria-label={t(T.hero.scroll, lang)}
-        className="absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-foreground/60 hover:text-foreground transition-colors"
+        className="absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-foreground/55 hover:text-foreground transition-colors"
       >
         <span className="text-[11px] uppercase tracking-[0.3em]">{t(T.hero.scroll, lang)}</span>
         <div className="relative h-9 w-5 rounded-full border border-foreground/30">
@@ -201,45 +177,40 @@ function Hero() {
   );
 }
 
-/* ---------------- Context / Why ---------------- */
+/* ---------------- Context / Why — full-bleed flat band ---------------- */
 
 function Context() {
   const { lang } = useLang();
   return (
-    <section id="about" className="relative scroll-mt-24 py-24 sm:py-32">
+    <section id="about" className="band-teal relative scroll-mt-24 py-24 sm:py-32">
       <div className="mx-auto grid max-w-7xl gap-12 px-6 lg:grid-cols-12 lg:gap-16">
-        <div className="lg:col-span-6">
+        <div className="lg:col-span-5">
           <SectionTag>{t(T.context.tag, lang)}</SectionTag>
           <h2 className="mt-4 font-display text-3xl font-semibold leading-tight sm:text-5xl">
             {t(T.context.title, lang)}
           </h2>
-          <p className="mt-6 max-w-lg text-foreground/70">
+          <p className="mt-6 max-w-lg text-foreground/75">
             {t(T.context.body, lang)}
           </p>
-          <p className="mt-8 text-xs uppercase tracking-wider text-foreground/45">
+          <p className="mt-8 text-xs uppercase tracking-wider text-foreground/50">
             {t(T.context.sources, lang)}
           </p>
         </div>
-        <div className="lg:col-span-6">
-          <div className="card-gradient relative overflow-hidden rounded-3xl p-8 sm:p-12"
-            style={{ boxShadow: "var(--shadow-card)" }}>
-            <div className="absolute -right-20 -top-20 h-64 w-64 rounded-full opacity-30 blur-3xl"
-              style={{ background: "var(--gradient-brand)" }} />
-            <div className="relative">
-              <div className="text-xs uppercase tracking-[0.25em] text-foreground/50">
-                {lang === "pt" ? "Indicador" : "Indicator"}
-              </div>
-              <div className="mt-4 font-display text-[8rem] font-semibold leading-none tracking-tighter sm:text-[11rem]">
-                <span className="text-gradient">{t(T.context.metric, lang)}</span>
-              </div>
-              <p className="mt-6 max-w-sm text-base text-foreground/80">
-                {t(T.context.metricLabel, lang)}
-              </p>
-              <div className="mt-8 h-px w-full bg-gradient-to-r from-transparent via-foreground/20 to-transparent" />
-              <div className="mt-6 flex items-center justify-between text-xs text-foreground/50">
-                <span>18–34</span>
-                <span>PT · 2024</span>
-              </div>
+        <div className="lg:col-span-7">
+          <div className="relative">
+            <div className="text-xs uppercase tracking-[0.25em] text-foreground/55">
+              {lang === "pt" ? "Indicador" : "Indicator"}
+            </div>
+            <div className="mt-2 font-display font-semibold leading-none tracking-tighter text-[9rem] sm:text-[14rem] lg:text-[17rem]">
+              <span className="text-gradient">{t(T.context.metric, lang)}</span>
+            </div>
+            <p className="mt-2 max-w-md text-base text-foreground/80">
+              {t(T.context.metricLabel, lang)}
+            </p>
+            <div className="mt-6 flex items-center gap-6 text-xs text-foreground/55">
+              <span>18–34</span>
+              <span className="h-px flex-1 bg-foreground/15" />
+              <span>PT · 2024</span>
             </div>
           </div>
         </div>
@@ -250,14 +221,14 @@ function Context() {
 
 function SectionTag({ children }: { children: React.ReactNode }) {
   return (
-    <div className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.25em] text-foreground/55">
+    <div className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.25em] text-foreground/60">
       <span className="h-px w-8" style={{ background: "var(--gradient-brand)" }} />
       {children}
     </div>
   );
 }
 
-/* ---------------- Features ---------------- */
+/* ---------------- Features — flat split list, no cards ---------------- */
 
 function Features() {
   const { lang } = useLang();
@@ -272,31 +243,28 @@ function Features() {
           </h2>
         </div>
 
-        <div className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-14 grid divide-y divide-black/10 border-y border-black/10 sm:grid-cols-2 sm:divide-x">
           {T.features.items.map((item, i) => {
             const Icon = icons[i];
+            const bottomBorder = i < 2 ? "sm:border-b sm:border-black/10" : "";
             return (
-              <article
-                key={i}
-                className="group card-gradient relative overflow-hidden rounded-2xl p-6 transition-all duration-300 hover:-translate-y-1"
-                style={{ boxShadow: "var(--shadow-card)" }}
-              >
-                <div className="absolute inset-x-0 top-0 h-px opacity-60"
-                  style={{ background: "var(--gradient-brand)" }} />
-                <div
-                  className="grid h-11 w-11 place-items-center rounded-xl border border-white/10"
-                  style={{ background: "color-mix(in oklab, var(--teal) 12%, transparent)" }}
-                >
-                  <Icon className="h-5 w-5" style={{ color: "var(--teal)" }} strokeWidth={1.8} />
+              <article key={i} className={`group relative p-8 sm:p-10 ${bottomBorder}`}>
+                <div className="flex items-start gap-5">
+                  <div
+                    className="grid h-12 w-12 shrink-0 place-items-center rounded-2xl"
+                    style={{ background: "var(--gradient-brand)" }}
+                  >
+                    <Icon className="h-5 w-5 text-white" strokeWidth={2} />
+                  </div>
+                  <div>
+                    <h3 className="font-display text-xl font-semibold">
+                      {t(item.title, lang)}
+                    </h3>
+                    <p className="mt-3 text-sm leading-relaxed text-foreground/70">
+                      {t(item.desc, lang)}
+                    </p>
+                  </div>
                 </div>
-                <h3 className="mt-5 font-display text-lg font-semibold">
-                  {t(item.title, lang)}
-                </h3>
-                <p className="mt-2 text-sm leading-relaxed text-foreground/65">
-                  {t(item.desc, lang)}
-                </p>
-                <div className="pointer-events-none absolute -bottom-16 -right-16 h-40 w-40 rounded-full opacity-0 blur-3xl transition-opacity duration-500 group-hover:opacity-30"
-                  style={{ background: "var(--gradient-brand)" }} />
               </article>
             );
           })}
@@ -306,7 +274,7 @@ function Features() {
   );
 }
 
-/* ---------------- Impact / SDG ---------------- */
+/* ---------------- Impact — full-bleed ink band ---------------- */
 
 function Impact() {
   const { lang } = useLang();
@@ -316,7 +284,7 @@ function Impact() {
   };
 
   return (
-    <section id="impact" className="relative scroll-mt-24 py-24 sm:py-32">
+    <section id="impact" className="band-ink relative scroll-mt-24 py-24 sm:py-32">
       <div className="mx-auto max-w-7xl px-6">
         <div className="grid gap-12 lg:grid-cols-12">
           <div className="lg:col-span-5">
@@ -324,7 +292,7 @@ function Impact() {
             <h2 className="mt-4 font-display text-3xl font-semibold leading-tight sm:text-5xl">
               {t(T.impact.title, lang)}
             </h2>
-            <p className="mt-6 text-foreground/70">
+            <p className="mt-6 text-white/75">
               {t(T.impact.eu, lang)}
             </p>
             <a
@@ -338,27 +306,24 @@ function Impact() {
           </div>
 
           <div className="lg:col-span-7">
-            <h3 className="text-xs uppercase tracking-[0.25em] text-foreground/55">
+            <h3 className="text-xs uppercase tracking-[0.25em] text-white/55">
               {t(T.impact.sdgTitle, lang)}
             </h3>
-            <div className="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-3">
+            <div className="mt-6 grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-white/15 bg-white/10 sm:grid-cols-3">
               {T.impact.sdgs.map((sdg) => {
                 const Icon = sdgIcons[sdg.n];
                 return (
-                  <div
-                    key={sdg.n}
-                    className="card-gradient rounded-xl p-4 transition-colors hover:border-white/20"
-                  >
+                  <div key={sdg.n} className="bg-[oklch(0.2_0.05_262)] p-4">
                     <div className="flex items-center gap-3">
                       <div
-                        className="grid h-9 w-9 shrink-0 place-items-center rounded-lg font-display text-sm font-semibold"
-                        style={{ background: "var(--gradient-brand)", color: "oklch(0.18 0.04 260)" }}
+                        className="grid h-9 w-9 shrink-0 place-items-center rounded-lg font-display text-sm font-semibold text-white"
+                        style={{ background: "var(--gradient-brand)" }}
                       >
                         {sdg.n}
                       </div>
-                      <Icon className="h-4 w-4 shrink-0 text-foreground/50" strokeWidth={1.8} />
+                      <Icon className="h-4 w-4 shrink-0 text-white/55" strokeWidth={1.8} />
                     </div>
-                    <p className="mt-3 text-sm font-medium leading-snug">
+                    <p className="mt-3 text-sm font-medium leading-snug text-white/90">
                       {t(sdg, lang)}
                     </p>
                   </div>
@@ -372,23 +337,23 @@ function Impact() {
   );
 }
 
-/* ---------------- News ---------------- */
+/* ---------------- Activities ---------------- */
 
-function News() {
+function Activities() {
   const { lang } = useLang();
   return (
-    <section id="news" className="relative scroll-mt-24 py-24 sm:py-32">
+    <section id="news" className="band-warm relative scroll-mt-24 py-24 sm:py-32">
       <div className="mx-auto max-w-7xl px-6">
         <div className="flex flex-col items-start justify-between gap-6 sm:flex-row sm:items-end">
           <div className="max-w-2xl">
             <SectionTag>{t(T.news.tag, lang)}</SectionTag>
             <h2 className="mt-4 font-display text-3xl font-semibold leading-tight sm:text-5xl">
-              {t(T.news.title, lang)}
+              <span className="text-gradient-warm">{t(T.news.title, lang)}</span>
             </h2>
-            <p className="mt-4 text-foreground/70">{t(T.news.body, lang)}</p>
+            <p className="mt-4 text-foreground/75">{t(T.news.body, lang)}</p>
           </div>
           <div className="flex items-center gap-3">
-            <span className="text-xs uppercase tracking-[0.2em] text-foreground/55">
+            <span className="text-xs uppercase tracking-[0.2em] text-foreground/60">
               {t(T.news.follow, lang)}
             </span>
             <SocialPill label="LinkedIn" href="#" />
@@ -396,20 +361,17 @@ function News() {
           </div>
         </div>
 
-        <div className="mt-12 grid gap-5 md:grid-cols-3">
+        <div className="mt-12 grid gap-px overflow-hidden rounded-2xl border border-black/10 bg-black/10 md:grid-cols-3">
           {[0, 1, 2].map((i) => (
-            <div
-              key={i}
-              className="card-gradient relative overflow-hidden rounded-2xl p-6"
-              style={{ boxShadow: "var(--shadow-card)" }}
-            >
-              <div className="aspect-[16/10] w-full rounded-xl"
+            <div key={i} className="bg-white p-6">
+              <div
+                className="aspect-[16/10] w-full rounded-xl"
                 style={{
                   background:
-                    "linear-gradient(135deg, oklch(0.28 0.05 262), oklch(0.22 0.04 260)), radial-gradient(circle at 30% 30%, oklch(0.65 0.24 295 / 0.4), transparent 60%)",
+                    "linear-gradient(135deg, oklch(0.82 0.16 75 / 0.6), oklch(0.72 0.18 25 / 0.6)), radial-gradient(circle at 30% 30%, oklch(0.62 0.24 295 / 0.5), transparent 60%)",
                 }}
               />
-              <div className="mt-5 text-xs uppercase tracking-wider text-foreground/45">
+              <div className="mt-5 text-xs uppercase tracking-wider text-foreground/50">
                 {lang === "pt" ? "Em breve" : "Coming soon"}
               </div>
               <p className="mt-2 font-display text-lg font-medium text-foreground/85">
@@ -427,7 +389,7 @@ function SocialPill({ label, href }: { label: string; href: string }) {
   return (
     <a
       href={href}
-      className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs font-medium text-foreground/80 transition-colors hover:border-white/25 hover:text-foreground"
+      className="rounded-full border border-black/10 bg-white/70 px-3 py-1 text-xs font-medium text-foreground/80 transition-colors hover:border-black/25 hover:text-foreground"
     >
       {label}
     </a>
@@ -437,17 +399,16 @@ function SocialPill({ label, href }: { label: string; href: string }) {
 /* ---------------- Partners Footer ---------------- */
 
 const partners = [
-  { name: "Eupasoft", url: "https://www.eupasoft.com" },
-  { name: "PCI — Creative Science Park", url: "http://www.pci.pt" },
-  { name: "Universidade de Aveiro", url: "https://www.ua.pt" },
-  { name: "ULS Coimbra", url: "https://www.ulscoimbra.min-saude.pt" },
+  { name: "Eupasoft", url: "https://www.eupasoft.com", logo: "https://logo.clearbit.com/eupasoft.com" },
+  { name: "PCI — Creative Science Park", url: "http://www.pci.pt", logo: "https://logo.clearbit.com/pci.pt" },
+  { name: "Universidade de Aveiro", url: "https://www.ua.pt", logo: "https://logo.clearbit.com/ua.pt" },
+  { name: "ULS Coimbra", url: "https://www.ulscoimbra.min-saude.pt", logo: "https://logo.clearbit.com/ulscoimbra.min-saude.pt" },
 ];
 
 function PartnersFooter() {
   const { lang } = useLang();
   return (
-    <footer id="partners" className="relative scroll-mt-24 border-t border-white/5 pt-24 pb-10"
-      style={{ background: "linear-gradient(180deg, transparent, oklch(0.15 0.04 262))" }}>
+    <footer id="partners" className="relative scroll-mt-24 border-t border-black/10 pt-24 pb-10">
       <div className="mx-auto max-w-7xl px-6">
         <div className="text-center">
           <SectionTag>{t(T.partners.tag, lang)}</SectionTag>
@@ -456,28 +417,100 @@ function PartnersFooter() {
           </h2>
         </div>
 
-        <div className="mt-14 grid grid-cols-2 gap-3 sm:grid-cols-4">
+        <div className="mt-14 grid grid-cols-2 items-stretch gap-px overflow-hidden rounded-2xl border border-black/10 bg-black/10 sm:grid-cols-4">
           {partners.map((p) => (
             <a
               key={p.name}
               href={p.url}
               target="_blank"
-              rel="noreferrer"
-              className="group card-gradient flex h-28 items-center justify-center rounded-2xl px-4 text-center transition-all hover:-translate-y-1 hover:border-white/25"
+              rel="noopener noreferrer"
+              className="group flex h-32 flex-col items-center justify-center gap-3 bg-white px-4 text-center transition-colors hover:bg-[oklch(0.98_0.02_200)]"
+              aria-label={p.name}
             >
-              <span className="font-display text-sm font-medium text-foreground/75 transition-colors group-hover:text-foreground">
+              <img
+                src={p.logo}
+                alt={p.name}
+                loading="lazy"
+                className="max-h-12 w-auto max-w-[140px] object-contain opacity-80 transition-opacity group-hover:opacity-100"
+                onError={(e) => {
+                  (e.currentTarget as HTMLImageElement).style.display = "none";
+                  const sibling = (e.currentTarget.nextElementSibling as HTMLElement | null);
+                  if (sibling) sibling.style.display = "block";
+                }}
+              />
+              <span
+                className="hidden font-display text-sm font-medium text-foreground/75"
+              >
+                {p.name}
+              </span>
+              <span className="text-[10px] uppercase tracking-[0.2em] text-foreground/45 group-hover:text-foreground/70">
                 {p.name}
               </span>
             </a>
           ))}
         </div>
 
-        <div className="mt-16 flex flex-col items-center justify-between gap-4 border-t border-white/5 pt-8 text-xs text-foreground/45 sm:flex-row">
-          <div className="flex items-center gap-2">
-            <Logo />
-            <span className="font-display text-sm font-semibold text-foreground/70">Theraverse</span>
+        {/* Contacts */}
+        <div className="mt-20 grid gap-10 border-t border-black/10 pt-12 md:grid-cols-12">
+          <div className="md:col-span-5">
+            <img src={logoSvg} alt="Theraverse" className="h-8 w-auto" style={{ color: "var(--ink)" }} />
+            <p className="mt-4 max-w-sm text-sm text-foreground/65">
+              {lang === "pt"
+                ? "Mundos Imersivos na Saúde — investigação e desenvolvimento para uma nova geração de cuidados em saúde mental."
+                : "Immersive Worlds in Healthcare — research and development for a new generation of mental health care."}
+            </p>
           </div>
+
+          <div className="md:col-span-7">
+            <h3 className="text-xs uppercase tracking-[0.25em] text-foreground/60">
+              {t(T.footer.contactsTitle, lang)}
+            </h3>
+            <ul className="mt-5 grid gap-4 sm:grid-cols-2">
+              <li className="flex items-start gap-3 text-sm">
+                <Mail className="mt-0.5 h-4 w-4 shrink-0 text-foreground/55" />
+                <div>
+                  <div className="text-[11px] uppercase tracking-wider text-foreground/50">
+                    {t(T.footer.generalEmail, lang)}
+                  </div>
+                  <a href="mailto:info@theraverse.pt" className="text-foreground/85 hover:text-foreground">
+                    info@theraverse.pt
+                  </a>
+                </div>
+              </li>
+              <li className="flex items-start gap-3 text-sm">
+                <Mail className="mt-0.5 h-4 w-4 shrink-0 text-foreground/55" />
+                <div>
+                  <div className="text-[11px] uppercase tracking-wider text-foreground/50">
+                    {t(T.footer.press, lang)}
+                  </div>
+                  <a href="mailto:press@theraverse.pt" className="text-foreground/85 hover:text-foreground">
+                    press@theraverse.pt
+                  </a>
+                </div>
+              </li>
+              <li className="flex items-start gap-3 text-sm sm:col-span-2">
+                <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-foreground/55" />
+                <div>
+                  <div className="text-[11px] uppercase tracking-wider text-foreground/50">
+                    {t(T.footer.address, lang)}
+                  </div>
+                  <p className="text-foreground/85">{t(T.footer.addressValue, lang)}</p>
+                </div>
+              </li>
+              <li className="flex items-start gap-3 text-sm sm:col-span-2">
+                <Linkedin className="mt-0.5 h-4 w-4 shrink-0 text-foreground/55" />
+                <div>
+                  <div className="text-[11px] uppercase tracking-wider text-foreground/50">LinkedIn</div>
+                  <a href="#" className="text-foreground/85 hover:text-foreground">linkedin.com/company/theraverse</a>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-black/10 pt-8 text-xs text-foreground/55 sm:flex-row">
           <p>© {new Date().getFullYear()} Theraverse. {t(T.footer.rights, lang)}</p>
+          <p className="text-foreground/45">Eupasoft · PCI · Universidade de Aveiro · ULS Coimbra</p>
         </div>
       </div>
     </footer>
