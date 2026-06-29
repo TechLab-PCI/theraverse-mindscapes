@@ -5,7 +5,7 @@ export const translations = {
     about: { pt: "Sobre", en: "About" },
     features: { pt: "Funcionalidades", en: "Features" },
     impact: { pt: "Impacto", en: "Impact" },
-    news: { pt: "Notícias", en: "News" },
+    news: { pt: "Atividades", en: "Activities" },
     partners: { pt: "Parceiros", en: "Partners" },
   },
   hero: {
@@ -15,8 +15,8 @@ export const translations = {
       en: "THERAVERSE: The Future of Digital Mental Health",
     },
     subtitle: {
-      pt: "Uma clínica imersiva potenciada por Realidade Virtual, Aumentada e Inteligência Artificial — desenhada para a geração de nativos digitais.",
-      en: "An immersive clinic powered by Virtual Reality, Augmented Reality and Artificial Intelligence — designed for digital natives.",
+      pt: "Um ecossistema imersivo potenciado por Realidade Virtual, Aumentada e Inteligência Artificial — desenhado para a geração de nativos digitais.",
+      en: "An immersive ecosystem powered by Virtual Reality, Augmented Reality and Artificial Intelligence — designed for digital natives.",
     },
     scroll: { pt: "Descobrir", en: "Discover" },
   },
@@ -27,8 +27,8 @@ export const translations = {
       en: "A silent challenge in young people's mental health",
     },
     body: {
-      pt: "Portugal apresenta elevadas taxas de prevalência de doenças psiquiátricas em jovens. O Theraverse responde com uma nova oferta de cuidados — imersiva, contínua e livre de estigma.",
-      en: "Portugal has high prevalence rates of psychiatric conditions among young people. Theraverse responds with a new care model — immersive, continuous and free of stigma.",
+      pt: "Portugal apresenta elevadas taxas de prevalência de doenças psiquiátricas em jovens. O Theraverse responde com uma nova abordagem de cuidados — imersiva, contínua e livre de estigma.",
+      en: "Portugal has high prevalence rates of psychiatric conditions among young people. Theraverse responds with a new care approach — immersive, continuous and free of stigma.",
     },
     metric: { pt: "39%", en: "39%" },
     metricLabel: {
@@ -41,7 +41,7 @@ export const translations = {
     },
   },
   features: {
-    tag: { pt: "A Clínica Imersiva", en: "The Immersive Clinic" },
+    tag: { pt: "O Ecossistema Imersivo", en: "The Immersive Ecosystem" },
     title: {
       pt: "Quatro pilares para uma nova geração de cuidados",
       en: "Four pillars for a new generation of care",
@@ -99,10 +99,10 @@ export const translations = {
     ],
   },
   news: {
-    tag: { pt: "Notícias & Publicações", en: "News & Publications" },
+    tag: { pt: "Atividades & Publicações", en: "Activities & Publications" },
     title: {
-      pt: "Acompanhe os 3 anos do projeto",
-      en: "Follow the 3-year project journey",
+      pt: "Acompanhe as atividades do projeto",
+      en: "Follow the project activities",
     },
     body: {
       pt: "Esta secção reunirá comunicações científicas, marcos do projeto e publicações da equipa. Em breve.",
@@ -117,8 +117,16 @@ export const translations = {
   },
   footer: {
     rights: {
-      pt: "Projeto de Investigação & Desenvolvimento — 3 anos.",
-      en: "Research & Development Project — 3 years.",
+      pt: "Projeto de Investigação & Desenvolvimento.",
+      en: "Research & Development Project.",
+    },
+    contactsTitle: { pt: "Contactos", en: "Contacts" },
+    generalEmail: { pt: "Email geral", en: "General email" },
+    press: { pt: "Imprensa", en: "Press" },
+    address: { pt: "Morada", en: "Address" },
+    addressValue: {
+      pt: "PCI — Creative Science Park, Via do Conhecimento, 3830-352 Ílhavo, Portugal",
+      en: "PCI — Creative Science Park, Via do Conhecimento, 3830-352 Ílhavo, Portugal",
     },
   },
 } as const;
